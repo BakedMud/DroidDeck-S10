@@ -1,0 +1,145 @@
+{
+  "archives": [
+    {
+      "files": [
+        {
+          "name": "x32/d3d8.dll",
+          "path": "dxvk/x32/d3d8.dll",
+          "sha256": "c9612be6aac99390156cdcd3b22054fba62cf68bfc948d753cc39282d37f67ab",
+          "size": 1658894
+        },
+        {
+          "name": "x32/d3d9.dll",
+          "path": "dxvk/x32/d3d9.dll",
+          "sha256": "fbd0e7d7aae39d5d623757ead228930c4be78cb3b16db6f352796577831ce36e",
+          "size": 7598094
+        },
+        {
+          "name": "x32/d3d10core.dll",
+          "path": "dxvk/x32/d3d10core.dll",
+          "sha256": "cd6052b1f6a02ab94fea5bfa3519e556fb353f585da4b64e3c810ef4cc37c808",
+          "size": 192526
+        },
+        {
+          "name": "x32/d3d11.dll",
+          "path": "dxvk/x32/d3d11.dll",
+          "sha256": "9bf51b5ab913e1bd84513b2b1608586bc0a651788df9e664b8135840b8c8c54d",
+          "size": 7942158
+        },
+        {
+          "name": "x32/dxgi.dll",
+          "path": "dxvk/x32/dxgi.dll",
+          "sha256": "d3772dc86267fe94eee7afc30c993f44297fd43b50210f1691f3d03ebf4d4402",
+          "size": 5738510
+        },
+        {
+          "name": "x64/d3d8.dll",
+          "path": "dxvk/x64/d3d8.dll",
+          "sha256": "cd870a8f5cdbfef33e7ccf7884d6f1c442e2c8ec22d6adea60fea3dbe83c32e2",
+          "size": 1499136
+        },
+        {
+          "name": "x64/d3d9.dll",
+          "path": "dxvk/x64/d3d9.dll",
+          "sha256": "4f80af96991073bb3dc25f3b93ec2c07ba25fcabb8a6e30ffd5eaae38c8465c7",
+          "size": 6934528
+        },
+        {
+          "name": "x64/d3d10core.dll",
+          "path": "dxvk/x64/d3d10core.dll",
+          "sha256": "4950e952ca291b13c0645322f1831414e77df87183ed2f81d5dde02c1fd43ff9",
+          "size": 978944
+        },
+        {
+          "name": "x64/d3d11.dll",
+          "path": "dxvk/x64/d3d11.dll",
+          "sha256": "3497d5f7dc78fa7affdba6777d3ab4aac7ec744d7e2c795fbf07dbff54058e6c",
+          "size": 7143424
+        },
+        {
+          "name": "x64/dxgi.dll",
+          "path": "dxvk/x64/dxgi.dll",
+          "sha256": "d6e0ca242dba6cb8606106a7fcb65268225520f03c68e36a365f44d65f863e74",
+          "size": 5230592
+        },
+        {
+          "name": "LICENSE",
+          "path": "licenses/dxvk-LICENSE",
+          "sha256": "a5cb1a6ded7d2d7e92d550ba28edd21be2d1d4044662b399887351023e30ce64",
+          "size": 1074
+        },
+        {
+          "name": "source-commit",
+          "path": "provenance/dxvk-source-commit",
+          "sha256": "cb748e54f2fcdca516189435647ea001dbd14f97e2df5b36fd2f13fc185a5dbf",
+          "size": 41
+        }
+      ],
+      "id": "dxvk",
+      "ignored": [
+        "SHA256SUMS",
+        "downstream.patch",
+        "source.tar.zst",
+        "submodules.txt",
+        "x32/d3d10core.dll.a",
+        "x32/d3d11.dll.a",
+        "x32/d3d8.dll.a",
+        "x32/d3d9.dll.a",
+        "x32/dxgi.dll.a",
+        "x64/d3d10core.dll.a",
+        "x64/d3d11.dll.a",
+        "x64/d3d8.dll.a",
+        "x64/d3d9.dll.a",
+        "x64/dxgi.dll.a"
+      ],
+      "sha256": "d08dd962ced3482883ad9e9eb4903a4d27a3756b4f989a97ecdfcccb53fbee66",
+      "size": 24063241,
+      "url": "https://github.com/wallentx/DroidDeck/releases/download/v0.3.2-progress.20261011.3/dxvk-aee0ebd.zip"
+    },
+    {
+      "files": [
+        {
+          "name": "libVkLayer_window_system_integration.so",
+          "path": "wsi/libVkLayer_window_system_integration.so",
+          "sha256": "d07b961181b9547fd48ad9f05cc6d3b808b824676eb5a186fe3feb8caa013f19",
+          "size": 436888
+        },
+        {
+          "name": "VkLayer_window_system_integration.json",
+          "path": "wsi/VkLayer_window_system_integration.json",
+          "sha256": "a1df8b1cee7315015d8fe82534451e373ae4d9cb2adfc232c68346ecbf2818ee",
+          "size": 3683
+        },
+        {
+          "name": "LICENSE",
+          "path": "licenses/wsi-LICENSE",
+          "sha256": "5eb8d2da52230d2d66ce078a89ae0173aac63e2e73bed5f907a34736d114ea30",
+          "size": 1086
+        },
+        {
+          "name": "source-commit",
+          "path": "provenance/wsi-source-commit",
+          "sha256": "8367150b20502af36c472651850694a15a3e2a1fd6b6beb1f6e12a85a97824f5",
+          "size": 41
+        }
+      ],
+      "id": "wsi",
+      "ignored": [
+        "SHA256SUMS",
+        "downstream.patch",
+        "source.tar.zst",
+        "vulkan-headers-commit"
+      ],
+      "sha256": "348f9ec42159c1ee6e2baba4312a5e845d26687238f29e3f4a1b0c3c97e13b3c",
+      "size": 362717,
+      "url": "https://github.com/wallentx/DroidDeck/releases/download/v0.3.2-progress.20261010.4/wsi-abe5861.zip"
+    }
+  ],
+  "format": 1,
+  "id": "powervr-bc-dxvk-v1",
+  "wrapper": {
+    "path": "run-proton.py",
+    "sha256": "f1d334e1918733617aa398a710593e7d2b638c395827e2f706b0d19411b6452c",
+    "size": 3653
+  }
+}
