@@ -600,6 +600,11 @@ class MainActivity : ComponentActivity() {
                     ),
                     FrontEndActions(
                         onPlay = { startSteamSession() },
+                        onManageSteamAccount = {
+                            startSession(Intent(this, SessionActivity::class.java)
+                                .putExtra(SessionService.EXTRA_STEAM_UI, "desktop")
+                                .putExtra(SessionService.EXTRA_STEAM_URL, "steam://open/settings"), steamSession = true)
+                        },
                         // The client's desktop UI, with gamescope's Deck integration disabled.
                         onPlayDesktopUi = {
                             startSession(Intent(this, SessionActivity::class.java)
@@ -1230,6 +1235,8 @@ class MainActivity : ComponentActivity() {
                 )
             },
         )
+        // A download can finish in the session drawer while this page is visible.
+        androidx.compose.runtime.LaunchedEffect(components.compDownloadRevision) { components.refreshComponents() }
         // A Proton installed or removed changes the stack's list of Protons.
         androidx.compose.runtime.LaunchedEffect(protons.protonBusyId) { if (protons.protonBusyId == null) components.refreshComponents() }
     }
