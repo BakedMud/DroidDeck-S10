@@ -385,10 +385,10 @@
     <string name="common_size_mb">%1$.1f MB</string>
     <string name="comp_runtime_driver">ランタイムドライバー</string>
     <string name="comp_runtime_driver_hint">Steam、ゲーム、デスクトップで使用されます。次回のセッションで有効になります。</string>
-    <string name="comp_import_turnip">Turnip zipをインポート…</string>
+    <string name="comp_import_turnip">ランタイムドライバーのzipをインポート…</string>
     <string name="comp_display_driver">ディスプレイドライバー</string>
     <string name="comp_display_driver_hint">どちらのモードでも画面への出力を担当します。アプリの再起動後に有効になります。</string>
-    <string name="comp_import_adrenotools">AdrenoTools zipをインポート…</string>
+    <string name="comp_import_adrenotools">表示ドライバーのzipをインポート…</string>
     <string name="comp_never">なし</string>
     <string name="comp_nightlies_checked">Nightliesの確認日時 %1$s</string>
     <string name="comp_title">コンポーネント</string>
@@ -564,7 +564,7 @@
     <string name="drawer_game_running">ゲーム実行中</string>
     <string name="drawer_reapplied">%1$sの起動時に再適用しました</string>
     <string name="drawer_original">元</string>
-    <string name="drawer_components_note">「コンポーネント」ページでダウンロード、インポート、削除してください。</string>
+    <string name="drawer_components_note">「コンポーネント」ページでインポート、削除してください。</string>
     <string name="setup_check_done">完了</string>
     <string name="setup_check_warn">要対応</string>
     <string name="setup_check_busy">処理中</string>
@@ -1165,8 +1165,8 @@
     <string name="drivers_not_checked">未確認 - 更新をタップして新しいドライバーを検索</string>
     <string name="drivers_bundle_sets_display">Android + Linux：ディスプレイドライバーも一緒に設定されます</string>
     <string name="drivers_bundle_sets_runtime">Android + Linux：ランタイムドライバーも一緒に設定されます</string>
-    <string name="drivers_runtime_builtin">実行環境に内蔵のTurnip</string>
-    <string name="drivers_system_vulkan">システムのVulkan：このGPU用の同梱ビルドはありません</string>
+    <string name="drivers_runtime_builtin">ランタイムに組み込み</string>
+    <string name="drivers_system_vulkan">端末のシステムVulkanドライバーを使用</string>
     <string name="drivers_bundled">%1$s（同梱）</string>
     <string name="drivers_manual">手動</string>
 
@@ -2088,4 +2088,19 @@
     <plurals name="games_already_n">
         <item quantity="other">%1$d 本はすでにゲームにあります</item>
     </plurals>
+    <string name="achievements_title">実績</string>
+    <string name="achievements_count">%2$d 個中 %1$d 個を解除</string>
+    <string name="achievements_count_short">%1$d / %2$d</string>
+    <string name="achievements_group_unlocked">解除済み · %1$d</string>
+    <string name="achievements_group_locked">未解除 · %1$d</string>
+    <string name="achievements_group_hidden">隠し実績 · %1$d</string>
+    <string name="achievements_hidden">隠し実績</string>
+    <string name="achievements_hidden_detail">解除すると詳細が表示されます。</string>
+    <string name="achievements_all">すべての実績を解除</string>
+    <string name="achievements_reading">読み込み中…</string>
+    <string name="achievements_signed_out">実績を表示するには %1$s にサインインしてください。</string>
+    <string name="achievements_unreachable">%1$s に接続できませんでした。オンラインになってから再度確認してください。</string>
+    <string name="achievements_none">%1$s にはこのゲームの実績がありません。</string>
+    <string name="achievements_show_all">すべて表示（%1$d）</string>
+    <string name="achievements_dialog_title">実績 · %1$s</string>
 </resources>

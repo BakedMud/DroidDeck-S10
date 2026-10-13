@@ -687,7 +687,7 @@ fun ComponentsPage(
         Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) {
             when (l) {
                 GPU_TAB -> {
-                    SmallButton(stringResource(R.string.comp_import_zip), onClick = gpuActions.onImportZip)
+                    if (gpu.canImportDrivers) SmallButton(stringResource(R.string.comp_import_zip), onClick = gpuActions.onImportZip)
                     var at by remember { mutableStateOf<Rect?>(null) }
                     Box(Modifier.onGloballyPositioned { at = it.boundsInRoot() }) {
                         FocusText(stringResource(R.string.gpu_separately) + " ›", pal.signal) {
@@ -920,7 +920,6 @@ fun ComponentsPage(
                     ) {
                         val tint = rememberUpdatedState(pal.signal)
                         val local = cardsAt[layer]?.translate(-stackAt)
-                        ChipGlide(LAYERS.indexOf(layer), local, tint, GlideAxis.Vertical, corner = 12.dp)
                         Stack(
                             layer, view, gpu, focus = layerFocus, landed = landed, rings = rings,
                             onPlaced = { l, r -> cardsAt[l] = r },
@@ -931,6 +930,8 @@ fun ComponentsPage(
                                 else runCatching { firstRow.requestFocus() }
                             },
                         )
+                        // Over the cards: under them, their rest fill hid it as it crossed them.
+                        ChipGlide(LAYERS.indexOf(layer), local, tint, GlideAxis.Vertical, corner = 12.dp)
                     }
                     if (!narrow) {
                         Spacer(Modifier.width(16.dp))
@@ -961,7 +962,7 @@ fun ComponentsPage(
                     if (d == "rt") DriverPage(
                         title = stringResource(R.string.comp_runtime_driver), hint = stringResource(R.string.comp_runtime_driver_hint),
                         rows = gpu.linuxRows, selected = gpu.linuxSelected, downloads = gpu.linuxDownloads,
-                        status = gpu.releaseStatus, checking = gpu.checking, importLabel = stringResource(R.string.comp_import_turnip), canRestore = false,
+                        status = gpu.releaseStatus, checking = gpu.checking, importLabel = stringResource(R.string.comp_import_turnip), canRestore = false, canImport = gpu.canImportDrivers,
                         onSelect = gpuActions.onSelectLinux, onDelete = gpuActions.onRemoveLinux, onRefresh = gpuActions.onRefresh,
                         onDownload = gpuActions.onDownloadDriver, onImport = gpuActions.onImportLinux, onRestore = {}, onBack = { driverPage = null },
                     )
@@ -969,7 +970,7 @@ fun ComponentsPage(
                         title = stringResource(R.string.comp_display_driver), hint = stringResource(R.string.comp_display_driver_hint),
                         rows = gpu.androidRows, selected = gpu.androidSelected, downloads = gpu.androidDownloads,
                         status = gpu.releaseStatus, checking = gpu.checking, importLabel = stringResource(R.string.comp_import_adrenotools),
-                        canRestore = gpu.canRestoreBundled,
+                        canRestore = gpu.canRestoreBundled, canImport = gpu.canImportDrivers,
                         onSelect = gpuActions.onSelectAndroid, onDelete = gpuActions.onRemoveAndroid, onRefresh = gpuActions.onRefresh,
                         onDownload = gpuActions.onDownloadDriver, onImport = gpuActions.onImportAndroid, onRestore = gpuActions.onRestoreBundled,
                         onBack = { driverPage = null },
@@ -1125,14 +1126,17 @@ private fun LayerCard(
     val pal = LocalPalette.current
     val src = remember { MutableInteractionSource() }
     val hot = rememberHot(src)
+    // The stack's glide draws the picked card's look by touch only; with a pad, its rest look and the bar.
+    val under = selected && androidx.compose.ui.platform.LocalInputModeManager.current.inputMode != androidx.compose.ui.input.InputMode.Keyboard
     Box(Modifier.fillMaxWidth().heightIn(min = 44.dp), contentAlignment = Alignment.Center) {
         Row(
             verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = modifier.fillMaxWidth().height(40.dp)
                 .landingPop(landed).pulseRing(ring, pal.signal)
                 .clip(LAYER_SHAPE)
-                .background(if (selected) Color.Transparent else colors.surface)
-                .glideBorder(hot, LAYER_SHAPE, pal.signal, if (selected) Color.Transparent else pal.line)
+                .background(if (under) Color.Transparent else colors.surface)
+                .shownBar(selected, pal.signal, vertical = true)
+                .glideBorder(hot, LAYER_SHAPE, pal.signal, if (under) Color.Transparent else pal.line)
                 .onFocusChanged { if (it.isFocused) onFocus() }
                 .hoverable(src).clickable(interactionSource = src, indication = null, role = Role.Tab, onClick = onClick)
                 .controllerConfirm(onClick = onClick)
