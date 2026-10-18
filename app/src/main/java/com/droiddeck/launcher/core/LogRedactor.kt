@@ -2,6 +2,24 @@ package com.droiddeck.launcher.core
 
 object LogRedactor {
     private val EMAIL = Regex("[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}")
+    private val HIDL_SHARED_LIBRARY = Regex(
+        "(?:android\\.(?:hardware|frameworks|hidl|system)|vendor\\.[A-Za-z0-9_]+\\.hardware)" +
+            "(?:\\.[A-Za-z0-9_]+)+@[0-9]+\\.[0-9]+(?:-[A-Za-z0-9_]+)*\\.so"
+    )
+    private val hidlMatcher = object : ThreadLocal<java.util.regex.Matcher>() {
+        override fun initialValue(): java.util.regex.Matcher = HIDL_SHARED_LIBRARY.toPattern().matcher("")
+    }
+
+    private fun isHidlSharedLibrary(input: String, match: MatchResult): Boolean {
+        val matcher = hidlMatcher.get()!!
+        val library = try { matcher.reset(match.value).matches() } finally { matcher.reset("") }
+        if (!library) return false
+        fun continuesToken(char: Char) = char.isLetterOrDigit() || char in "._%+@-"
+        val start = match.range.first
+        val end = match.range.last + 1
+        return (start == 0 || !continuesToken(input[start - 1])) &&
+            (end == input.length || !continuesToken(input[end]))
+    }
     private val JWT_LABELLED = Regex("(?i)(\\bJWT[\\s=:]+)(\\d{8,})")
     private val JWT_BASE64 = Regex("ey[A-Za-z0-9_\\-]{6,}\\.[A-Za-z0-9_\\-]{6,}\\.[A-Za-z0-9_\\-]{6,}")
     private val GUID = Regex("\\b[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\\b")
@@ -250,7 +268,9 @@ object LogRedactor {
             }
             if (out.has("login")) out.set(LOGIN_KV.replace(out.text) { "${it.groupValues[1]}${it.groupValues[2]}${quoted(it.groupValues[3])}" })
             for (r in accounts) if (r.needs == null || out.has(r.needs)) out.set(r.regex.replace(out.text, "<redacted:account>"))
-            if ('@' in out.text) out.set(EMAIL.replace(out.text, "<redacted:email>"))
+            if ('@' in out.text) out.set(EMAIL.replace(out.text) { m ->
+                m.value.takeIf { isHidlSharedLibrary(out.text, m) } ?: "<redacted:email>"
+            })
             if (out.has("jwt", "token", "ticket", "sessionid", "steamloginsecure", "machineauth")) {
                 out.set(RESIDUAL.replace(out.text) { "${it.groupValues[1]}=<redacted:token>" })
             }
